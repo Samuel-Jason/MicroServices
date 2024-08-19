@@ -11,12 +11,32 @@ namespace GeekShopping.ProductAPI.Model.Context
         {
             modelBuilder.Entity<Product>().HasData(new Product
             {
+                Id = 1,
+                Name = "Camiseta Polo",
+                Price = new decimal(69.9),
+                Description = "Polo",
+                ImageURL = "polo_image_url.jpg",
+                CategoryName = "T-Shirt",
+            });
+
+            modelBuilder.Entity<Product>().HasData(new Product
+            {
                 Id = 2,
-                Name = "Name",
-                Price = 69.9,
-                Description = "",
-                ImageURL = "",
-                CategoryName = "",
+                Name = "Camiseta Básica",
+                Price = new decimal(49.9),
+                Description = "Camiseta básica de algodão",
+                ImageURL = "basic_tee_image_url.jpg",
+                CategoryName = "T-Shirt",
+            });
+
+            modelBuilder.Entity<Product>().HasData(new Product
+            {
+                Id = 3,
+                Name = "Jaqueta Esportiva",
+                Price = new decimal(99.9),
+                Description = "Jaqueta para atividades esportivas",
+                ImageURL = "sport_jacket_image_url.jpg",
+                CategoryName = "Outerwear",
             });
         }
     }

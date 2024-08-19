@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace GeekShopping.ProductAPI.Controllers
 {
     Route[(["api/v1/[controller]")]
-    [ApiController]
     public class ProductController : ControllerBase
     {
         private IProductRepository _Repository;
@@ -16,9 +15,9 @@ namespace GeekShopping.ProductAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductVO>>> FindAll(long id)
+        public async Task<ActionResult<IEnumerable<ProductVO>>> FindAllAsync(long id)
         {
-            var product = await _Repository.FindAll();
+            var product = await _Repository.FindAllAsync();
             if (product != null) return Ok(product);
         }
 
@@ -26,7 +25,8 @@ namespace GeekShopping.ProductAPI.Controllers
         public async Task<ActionResult> FindById(long id)
         {
             var product = await _Repository.FindById(id);
-            if (product != null) return Ok(product);
+            if (product.Id <= 0) return NotFound();
+            return Ok(product);
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@ namespace GeekShopping.ProductAPI.Controllers
                 var res = await _Repository.Update(vo);
             }
 
-            return Ok(product);
+            return Ok(vo);
         }
 
         [HttpDelete("{id}")]
